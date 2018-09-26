@@ -1,0 +1,40 @@
+From ee0f67b7199bd9b3eb91d83ba90d14397da3387b Mon Sep 17 00:00:00 2001
+From: "Brett T. Warden" <brett.t.warden@intel.com>
+Date: Wed, 26 Sep 2018 13:47:53 -0700
+Subject: [PATCH 1/2] Make lib symlinks relative
+
+---
+ Makefile | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/Makefile b/Makefile
+index 008fb4e..eb7330e 100644
+--- a/Makefile
++++ b/Makefile
+@@ -149,10 +149,10 @@ $(TGT): $(OBJS)
+ 	$(QUIET) $(CXX) $(LDFLAGS) -o $@ $^ $(LIB_DEP_FLAGS)
+ 
+ $(LIB_DIR)/$(LIB_MAJOR_LINK): $(TGT)
+-	$(QUIET) cd $(LIB_DIR) ; $(RM) $(LIB_MAJOR_LINK) ; ln -s $(LIB) $(LIB_MAJOR_LINK)
++	$(QUIET) cd $(LIB_DIR) ; $(RM) $(LIB_MAJOR_LINK) ; ln -rs $(LIB) $(LIB_MAJOR_LINK)
+ 
+ $(LIB_DIR)/$(LIB_LINK): $(LIB_DIR)/$(LIB_MAJOR_LINK)
+-	$(QUIET) cd $(LIB_DIR) ; $(RM) $(LIB_LINK) ; ln -s $(LIB_MAJOR_LINK) $(LIB_LINK)
++	$(QUIET) cd $(LIB_DIR) ; $(RM) $(LIB_LINK) ; ln -rs $(LIB_MAJOR_LINK) $(LIB_LINK)
+ 
+ .PHONY: dump
+ dump:
+@@ -216,8 +216,8 @@ install: $(TGT)
+ 	mkdir -p $(DESTDIR)${libdir}
+ 	for fil in $(HDRS) ; do $(INSTALL_DATA) ${INSTALL_OPTS} $(HDR_DIR)/$${fil} $(DESTDIR)${includedir} ; done
+ 	$(INSTALL_DATA) ${INSTALL_OPTS} ${TGT} $(DESTDIR)${libdir}
+-	ln -s $(DESTDIR)${libdir}/$(LIB) $(DESTDIR)${libdir}/$(LIB_MAJOR_LINK)
+-	ln -s $(DESTDIR)${libdir}/$(LIB_MAJOR_LINK) $(DESTDIR)${libdir}/$(LIB_LINK)
++	ln -rs $(DESTDIR)${libdir}/$(LIB) $(DESTDIR)${libdir}/$(LIB_MAJOR_LINK)
++	ln -rs $(DESTDIR)${libdir}/$(LIB_MAJOR_LINK) $(DESTDIR)${libdir}/$(LIB_LINK)
+ 
+ uninstall:
+ 	rm -rf $(DESTDIR)${includedir}
+-- 
+2.19.0
+

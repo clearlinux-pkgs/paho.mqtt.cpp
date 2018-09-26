@@ -1,0 +1,1 @@
+prefix=/usr PAHO_C_LIB_DIR=${RPM_BUILD_ROOT}/usr/lib PAHO_C_INC_DIR=${RPM_BUILD_ROOT}/usr/include

@@ -1,0 +1,1 @@
+make VERBOSE=1 V=1 %{?_smp_mflags} check PAHO_C_DIR=${RPM_BUILD_ROOT}/usr PAHO_CPP_DIR=${RPM_BUILD_ROOT}/usr
