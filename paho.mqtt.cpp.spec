@@ -4,7 +4,7 @@
 #
 Name     : paho.mqtt.cpp
 Version  : 1.1
-Release  : 4
+Release  : 5
 URL      : https://github.com/eclipse/paho.mqtt.cpp/archive/v1.1/paho.mqtt.cpp-1.1.tar.gz
 Source0  : https://github.com/eclipse/paho.mqtt.cpp/archive/v1.1/paho.mqtt.cpp-1.1.tar.gz
 Summary  : MQTT CPP Client
@@ -42,13 +42,14 @@ lib components for the paho.mqtt.cpp package.
 
 %prep
 %setup -q -n paho.mqtt.cpp-1.1
+cd %{_builddir}/paho.mqtt.cpp-1.1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1571350378
+export SOURCE_DATE_EPOCH=1588184285
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -56,15 +57,15 @@ export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
 export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FCFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
 export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
 %cmake ..
 make  %{?_smp_mflags}  VERBOSE=1
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1571350378
+export SOURCE_DATE_EPOCH=1588184285
 rm -rf %{buildroot}
 pushd clr-build
 %make_install prefix=/usr PAHO_C_LIB_DIR=${RPM_BUILD_ROOT}/usr/lib PAHO_C_INC_DIR=${RPM_BUILD_ROOT}/usr/include
