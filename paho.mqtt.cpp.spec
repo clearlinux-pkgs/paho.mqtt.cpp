@@ -4,7 +4,7 @@
 #
 Name     : paho.mqtt.cpp
 Version  : 1.2.0
-Release  : 6
+Release  : 7
 URL      : https://github.com/eclipse/paho.mqtt.cpp/archive/v1.2.0/paho.mqtt.cpp-1.2.0.tar.gz
 Source0  : https://github.com/eclipse/paho.mqtt.cpp/archive/v1.2.0/paho.mqtt.cpp-1.2.0.tar.gz
 Summary  : MQTT CPP Client
